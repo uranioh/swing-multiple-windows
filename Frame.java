@@ -1,5 +1,3 @@
-package verifica;
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -36,17 +34,17 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
         super("Verifica di informatica Casti Michele 4C");
         Container c = this.getContentPane();
 
-        c.setLayout(new BoxLayout(c,BoxLayout.Y_AXIS));
+        c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
         JPanel superiore = new JPanel();
         JPanel inferiore = new JPanel();
 
-        superiore.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        superiore.setLayout(new GridLayout(2,1));
+        superiore.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        superiore.setLayout(new GridLayout(2, 1));
         superiore.setBackground(Color.CYAN);
 
         inferiore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inferiore.setLayout(new GridLayout(1,2));
+        inferiore.setLayout(new GridLayout(1, 2));
 
 
         bottone1.addActionListener(this);
@@ -68,12 +66,6 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
         testo2.setBackground(Color.CYAN);
 
 
-
-
-
-
-
-
         superiore.add(testo1);
         superiore.add(testo2);
 
@@ -84,20 +76,15 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
         inferiore.add(bottone2);
 
 
-
         c.add(inferiore);
-
-
 
 
     }
 
 
-
-
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        if(e.getActionCommand().equals("bottone1")) {
+        if (e.getActionCommand().equals("bottone1")) {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             Accesso test2 = new Accesso();
             test2.setBounds(700, 200, 500, 350);
@@ -105,8 +92,7 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
 
             test2.setForeground(Color.WHITE);
 
-        }
-        else if(e.getActionCommand().equals("bottone2")) {
+        } else if (e.getActionCommand().equals("bottone2")) {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             Registrazione test3 = new Registrazione();
             test3.setBounds(700, 200, 600, 450);
@@ -116,18 +102,6 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
