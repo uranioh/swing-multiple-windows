@@ -1,27 +1,36 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import javax.swing.*;
 
 public class Registrazione extends JFrame implements ActionListener, WindowListener {
-    public int[] numeri = {0, 0, 0, 0, 0};
-    int x = 5;
-    int placeholder;
-    JLabel testo1 = new JLabel("Prima Stringa");
-    JLabel testo2 = new JLabel("Seconda Stringa");
-    JLabel testo3 = new JLabel("Terza Stringa");
-    JLabel testo4 = new JLabel("Quarta Stringa");
-    JLabel testo5 = new JLabel("Quinta Stringa");
+    //nome,cognome,sesso,provincia,città;
+
+    String dati[] ={null,null,null,null,null};
+    JLabel testo1 = new JLabel("Username");
+    JLabel testo2 = new JLabel("Password");
+    JLabel testo3 = new JLabel("Conferma Password");
+    JLabel testo4 = new JLabel("Nome");
+    JLabel testo5 = new JLabel("Cognome");
     JTextField num1 = new JTextField("");
     JTextField num2 = new JTextField("");
     JTextField num3 = new JTextField("");
     JTextField num4 = new JTextField("");
     JTextField num5 = new JTextField("");
-    JButton bottone1 = new JButton("Accedi");
-    JButton bottone2 = new JButton("Registrati");
+    JButton bottone2 = new JButton("invio");
+    JButton bottone3 = new JButton("Annulla");
+    JRadioButton uno = new JRadioButton("maschio");
+    JRadioButton due = new JRadioButton("femmina");
 
-
+    JLabel testo6 = new JLabel("Provincia");
+    String[] tre ={"Selargius","Cagliari","Villasor","Domus de Maria","Napoli"};
+    JComboBox quattro = new JComboBox(tre);
+    JLabel testo7 = new JLabel("Città");
+    JTextField num6 = new JTextField("");
     public Registrazione() {
         super("Crea nuovo Account");
+
         Container c = this.getContentPane();
 
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
@@ -30,18 +39,24 @@ public class Registrazione extends JFrame implements ActionListener, WindowListe
         JPanel inferiore = new JPanel();
 
         superiore.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        superiore.setLayout(new GridLayout(5, 2, 20, 20));
+        superiore.setLayout(new GridLayout(8,2 , 10, 10));
         superiore.setBackground(Color.GRAY);
 
         inferiore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inferiore.setLayout(new GridLayout(2, 1));
+        inferiore.setLayout(new GridLayout(2,2));
 
+ButtonGroup bottoni = new ButtonGroup();
+bottoni.add(uno);
+bottoni.add(due);
 
-        bottone1.addActionListener(this);
-        bottone1.setActionCommand("bottone1");
+        uno.setBackground(Color.GRAY);
         bottone2.addActionListener(this);
         bottone2.setActionCommand("bottone2");
-
+        due.setBackground(Color.GRAY);
+        due.addActionListener(this);
+        due.setActionCommand("due");
+        uno.addActionListener(this);
+        uno.setActionCommand("uno");
         this.pack();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
@@ -62,14 +77,18 @@ public class Registrazione extends JFrame implements ActionListener, WindowListe
         superiore.add(num4);
         superiore.add(testo5);
         superiore.add(num5);
+        superiore.add(uno);
+        superiore.add(due);
+        superiore.add(testo6);
+superiore.add(quattro);
+        superiore.add(testo7);
+        superiore.add(num6);
         c.add(superiore);
 
-
-        inferiore.add(bottone1);
-        inferiore.add(bottone2);
-
-
+inferiore.add(bottone2);
+inferiore.add(bottone3);
         c.add(inferiore);
+
 
 
     }
@@ -77,13 +96,54 @@ public class Registrazione extends JFrame implements ActionListener, WindowListe
 
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        if (e.getActionCommand().equals("bottone1")) {
-            System.exit(0);
-            Accesso test2 = new Accesso();
-            test2.setBounds(700, 200, 500, 350);
-            test2.getContentPane().setBackground(Color.BLACK);
+        boolean errore=false;
+        String InputSuFileStringa;
+        if (e.getActionCommand().equals("bottone1")){
+        //   if ( num1.()){
+            //   tastierino test4 = new tastierino();
+         //       test4.setBounds(700, 200, 500, 350);
+          //      test4.getContentPane().setBackground(Color.BLACK);
+           // while(password<6){
+            //
+           // }
+         //   }
+            dati[1]= String.valueOf(Float.parseFloat(num1.getText()));
+            dati[2]= String.valueOf(Float.parseFloat(num2.getText()));
+            if(bottone2.isSelected()) {
+                dati[3]="maschio";
+            }
+            else
+                dati[3]="femmina";
 
-            test2.setForeground(Color.WHITE);
+            dati[4]= String.valueOf(Float.parseFloat(num1.getText()));
+            dati[5]= String.valueOf(Float.parseFloat(num1.getText()));
+while(errore==true) {
+
+    for (int i = 0; i < dati.length; i++) {
+if(dati[i]==null) {
+    scemo test2 = new scemo();
+    test2.setBounds(700, 200, 500, 350);
+    test2.getContentPane().setBackground(Color.BLACK);
+    for (int r = 0; r < dati.length; r++) {
+        dati[r]=null;
+    }
+}
+
+
+
+    }
+    errore=false;
+}
+//scriviSuFile=new PrintWriter(new FileOutputStream(nomeFile,true));
+//for(int i=0;i<9;i++){
+  //  inputSuFileStringa=inputSuFileStringa+" "+inputString[i];
+  //  System.out.println(inputString[i]);
+//}
+        }
+
+         if (e.getActionCommand().equals("bottone2")) {
+            System.exit(0);
+
 
         }
     }
@@ -102,6 +162,11 @@ public class Registrazione extends JFrame implements ActionListener, WindowListe
         int r = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler uscire?", "messaggio importante", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             System.exit(0);
+            Accesso test2 = new Accesso();
+            test2.setBounds(700, 200, 500, 350);
+            test2.getContentPane().setBackground(Color.BLACK);
+
+            test2.setForeground(Color.WHITE);
         }
     }
 

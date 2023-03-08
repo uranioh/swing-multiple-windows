@@ -72,8 +72,12 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
             Accesso test2 = new Accesso();
             test2.setBounds(700, 200, 500, 350);
             test2.getContentPane().setBackground(Color.BLACK);
-
             test2.setForeground(Color.WHITE);
+
+            tastierino test4 = new tastierino();
+            test4.setBounds(700, 200, 500, 350);
+            test4.getContentPane().setBackground(Color.BLACK);
+
 
         } else if (e.getActionCommand().equals("bottone2")) {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -82,6 +86,7 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
             test3.getContentPane().setBackground(Color.BLACK);
 
             test3.setForeground(Color.WHITE);
+
 
         }
     }

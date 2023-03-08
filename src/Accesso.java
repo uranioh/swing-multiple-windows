@@ -8,7 +8,7 @@ public class Accesso extends JFrame implements ActionListener, WindowListener {
     JLabel testo2 = new JLabel("Password");
     JTextField t1 = new JTextField();
     JTextField t2 = new JTextField();
-    JButton bottone1 = new JButton("indietro");
+    JButton bottone1= new JButton("indietro");
     JButton bottone2 = new JButton("Invio");
     JButton bottone3 = new JButton("Annulla");
 
@@ -55,7 +55,6 @@ public class Accesso extends JFrame implements ActionListener, WindowListener {
         c.add(superiore);
 
 
-        inferiore.add(bottone1);
         inferiore.add(bottone2);
         inferiore.add(bottone3);
 
