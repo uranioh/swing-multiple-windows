@@ -3,50 +3,44 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class tastierino extends JFrame implements ActionListener, WindowListener {
-    int password=0;
-    String truepassword="12345678910";
-    String[] cancella={null,null,null,null,null,null,null,null,null,null,null};
+public class KeypadWindow extends JFrame implements ActionListener, WindowListener {
+    int password = 0;
+    String truepassword = "12345678910";
+    String[] cancella = {null, null, null, null, null, null, null, null, null, null, null};
     String s;
     JButton[] x = new JButton[11];
 
 
-
-    public tastierino() {
+    public KeypadWindow() {
         super("odio java");
         Container c = this.getContentPane();
 
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
         JPanel superiore = new JPanel();
         JPanel inferiore = new JPanel();
-        superiore.setLayout(new GridLayout(3,3));
+        superiore.setLayout(new GridLayout(3, 3));
         c.setBackground(Color.GRAY);
-        inferiore.setLayout(new GridLayout(1,3));
-c.add(inferiore);
-        for(int y=1;y<13;y++){
-            if(y==10){
+        inferiore.setLayout(new GridLayout(1, 3));
+        c.add(inferiore);
+        for (int y = 1; y < 13; y++) {
+            if (y == 10) {
                 x[y].setText("0");
                 x[y].addActionListener(this);
                 inferiore.add(x[y]);
             }
-            if(y==11){
+            if (y == 11) {
                 x[y].setText("X");
                 x[y].addActionListener(this);
                 inferiore.add(x[y]);
-            }
-            else
-            if(y==12){
+            } else if (y == 12) {
                 x[y].setText("DEL");
                 x[y].addActionListener(this);
                 inferiore.add(x[y]);
-            }
-            else
-                s = ""+y+"";
+            } else
+                s = "" + y + "";
             x[y].addActionListener(this);
             x[y].setText(s);
         }
-
-
 
 
         c.add(superiore);
@@ -55,45 +49,40 @@ c.add(inferiore);
 
     @Override
     public void actionPerformed(ActionEvent e) {
-int num;
-boolean uguale=false;
-boolean canc=false;
-        int y=10;
-int i=0;
-String placeholder ="";
-        while(uguale==false) {
+        int num;
+        boolean uguale = false;
+        boolean canc = false;
+        int y = 10;
+        int i = 0;
+        String placeholder = "";
+        while (uguale == false) {
 
 
             while (password < 10) {
                 if (e.getActionCommand().equals(s)) {
-                    if(s=="X"){
-                        while(canc==false)
-                            if(cancella[y]=="null"){
+                    if (s == "X") {
+                        while (canc == false)
+                            if (cancella[y] == "null") {
                                 y--;
-                            }
-                            else
-                                cancella[y]=null;
-                            canc=true;
-                        }
-                    else if(s=="DEL"){
-                        placeholder=null;
+                            } else
+                                cancella[y] = null;
+                        canc = true;
+                    } else if (s == "DEL") {
+                        placeholder = null;
                     }
-cancella[password]=s;
+                    cancella[password] = s;
                     placeholder = placeholder + x[password];
                     password++;
 
                 }
 
             }
-            if(placeholder==truepassword){
-                uguale=true;
+            if (placeholder == truepassword) {
+                uguale = true;
             }
         }
 
-        }
-
-
-
+    }
 
 
     @Override

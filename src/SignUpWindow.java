@@ -1,13 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import javax.swing.*;
 
-public class Registrazione extends JFrame implements ActionListener, WindowListener {
+public class SignUpWindow extends JFrame implements ActionListener, WindowListener {
     //nome,cognome,sesso,provincia,città;
 
-    String dati[] ={null,null,null,null,null};
+    String[] dati = {null, null, null, null, null};
     JLabel testo1 = new JLabel("Username");
     JLabel testo2 = new JLabel("Password");
     JLabel testo3 = new JLabel("Conferma Password");
@@ -24,11 +22,12 @@ public class Registrazione extends JFrame implements ActionListener, WindowListe
     JRadioButton due = new JRadioButton("femmina");
 
     JLabel testo6 = new JLabel("Provincia");
-    String[] tre ={"Selargius","Cagliari","Villasor","Domus de Maria","Napoli"};
+    String[] tre = {"Selargius", "Cagliari", "Villasor", "Domus de Maria", "Napoli"};
     JComboBox quattro = new JComboBox(tre);
     JLabel testo7 = new JLabel("Città");
     JTextField num6 = new JTextField("");
-    public Registrazione() {
+
+    public SignUpWindow() {
         super("Crea nuovo Account");
 
         Container c = this.getContentPane();
@@ -39,15 +38,15 @@ public class Registrazione extends JFrame implements ActionListener, WindowListe
         JPanel inferiore = new JPanel();
 
         superiore.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        superiore.setLayout(new GridLayout(8,2 , 10, 10));
+        superiore.setLayout(new GridLayout(8, 2, 10, 10));
         superiore.setBackground(Color.GRAY);
 
         inferiore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inferiore.setLayout(new GridLayout(2,2));
+        inferiore.setLayout(new GridLayout(2, 2));
 
-ButtonGroup bottoni = new ButtonGroup();
-bottoni.add(uno);
-bottoni.add(due);
+        ButtonGroup bottoni = new ButtonGroup();
+        bottoni.add(uno);
+        bottoni.add(due);
 
         uno.setBackground(Color.GRAY);
         bottone2.addActionListener(this);
@@ -80,68 +79,49 @@ bottoni.add(due);
         superiore.add(uno);
         superiore.add(due);
         superiore.add(testo6);
-superiore.add(quattro);
+        superiore.add(quattro);
         superiore.add(testo7);
         superiore.add(num6);
         c.add(superiore);
 
-inferiore.add(bottone2);
-inferiore.add(bottone3);
+        inferiore.add(bottone2);
+        inferiore.add(bottone3);
         c.add(inferiore);
-
 
 
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        boolean errore=false;
+        boolean errore = false;
         String InputSuFileStringa;
-        if (e.getActionCommand().equals("bottone1")){
-        //   if ( num1.()){
-            //   tastierino test4 = new tastierino();
-         //       test4.setBounds(700, 200, 500, 350);
-          //      test4.getContentPane().setBackground(Color.BLACK);
-           // while(password<6){
-            //
-           // }
-         //   }
-            dati[1]= String.valueOf(Float.parseFloat(num1.getText()));
-            dati[2]= String.valueOf(Float.parseFloat(num2.getText()));
-            if(bottone2.isSelected()) {
-                dati[3]="maschio";
-            }
-            else
-                dati[3]="femmina";
+        if (e.getActionCommand().equals("bottone1")) {
+//               if ( num1.()){
+//               tastierino test4 = new tastierino();
+//                   test4.setBounds(700, 200, 500, 350);
+//                  test4.getContentPane().setBackground(Color.BLACK);
+//             while(password<6){
+//
+//             }
+//               }
+            dati[1] = String.valueOf(Float.parseFloat(num1.getText()));
+            dati[2] = String.valueOf(Float.parseFloat(num2.getText()));
+            if (bottone2.isSelected()) {
+                dati[3] = "maschio";
+            } else
+                dati[3] = "femmina";
 
-            dati[4]= String.valueOf(Float.parseFloat(num1.getText()));
-            dati[5]= String.valueOf(Float.parseFloat(num1.getText()));
-while(errore==true) {
+            dati[4] = String.valueOf(Float.parseFloat(num1.getText()));
+            dati[5] = String.valueOf(Float.parseFloat(num1.getText()));
 
-    for (int i = 0; i < dati.length; i++) {
-if(dati[i]==null) {
-    scemo test2 = new scemo();
-    test2.setBounds(700, 200, 500, 350);
-    test2.getContentPane().setBackground(Color.BLACK);
-    for (int r = 0; r < dati.length; r++) {
-        dati[r]=null;
-    }
-}
-
-
-
-    }
-    errore=false;
-}
-//scriviSuFile=new PrintWriter(new FileOutputStream(nomeFile,true));
-//for(int i=0;i<9;i++){
-  //  inputSuFileStringa=inputSuFileStringa+" "+inputString[i];
-  //  System.out.println(inputString[i]);
-//}
+//            scriviSuFile=new PrintWriter(new FileOutputStream(nomeFile,true));
+//            for(int i=0;i<9;i++){
+//                        inputSuFileStringa=inputSuFileStringa+" "+inputString[i];
+//                         System.out.println(inputString[i]);
+//            }
         }
 
-         if (e.getActionCommand().equals("bottone2")) {
+        if (e.getActionCommand().equals("bottone2")) {
             System.exit(0);
 
 
@@ -151,18 +131,15 @@ if(dati[i]==null) {
 
     @Override
     public void windowOpened(WindowEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        // TODO Auto-generated method stub
-        // TODO Auto-generated method stub
         int r = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler uscire?", "messaggio importante", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             System.exit(0);
-            Accesso test2 = new Accesso();
+            LoginWindow test2 = new LoginWindow();
             test2.setBounds(700, 200, 500, 350);
             test2.getContentPane().setBackground(Color.BLACK);
 

@@ -2,18 +2,17 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Frame extends JFrame implements ActionListener, WindowListener {
-
+public class LoginWindow extends JFrame implements ActionListener, WindowListener {
     int placeholder;
-    JLabel testo1 = new JLabel("Premi 'Accedi' per effettuare il login ");
-    JLabel testo2 = new JLabel("'Registrati' per effettuare la registrazione");
+    JLabel testo1 = new JLabel("Username");
+    JLabel testo2 = new JLabel("Password");
+    JTextField t1 = new JTextField();
+    JTextField t2 = new JTextField();
+    JButton bottone1 = new JButton("indietro");
+    JButton bottone2 = new JButton("Invio");
+    JButton bottone3 = new JButton("Annulla");
 
-
-    JButton bottone1 = new JButton("Accedi");
-    JButton bottone2 = new JButton("Registrati");
-
-
-    public Frame() {
+    public LoginWindow() {
         super("Verifica di informatica Casti Michele 4C");
         Container c = this.getContentPane();
 
@@ -24,17 +23,18 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
 
         superiore.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         superiore.setLayout(new GridLayout(2, 1));
-        superiore.setBackground(Color.CYAN);
+
 
         inferiore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inferiore.setLayout(new GridLayout(1, 2));
+        inferiore.setLayout(new GridLayout(1, 3));
 
 
         bottone1.addActionListener(this);
         bottone1.setActionCommand("bottone1");
         bottone2.addActionListener(this);
         bottone2.setActionCommand("bottone2");
-
+        bottone2.addActionListener(this);
+        bottone3.setActionCommand("bottone3");
         this.pack();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
@@ -42,21 +42,21 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
         this.addWindowListener(this);
 
         testo1.setFont(new Font("Arial", Font.BOLD, 16));
-        testo1.setBackground(Color.CYAN);
-        testo1.setOpaque(true);
         testo2.setFont(new Font("Arial", Font.BOLD, 16));
-        testo2.setOpaque(true);
-        testo2.setBackground(Color.CYAN);
+        t1.setFont(new Font("Arial", Font.BOLD, 10));
+        t2.setFont(new Font("Arial", Font.BOLD, 10));
 
 
         superiore.add(testo1);
+        superiore.add(t1);
         superiore.add(testo2);
 
+        superiore.add(t2);
         c.add(superiore);
 
 
-        inferiore.add(bottone1);
         inferiore.add(bottone2);
+        inferiore.add(bottone3);
 
 
         c.add(inferiore);
@@ -68,25 +68,28 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (e.getActionCommand().equals("bottone1")) {
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            Accesso test2 = new Accesso();
+
+            LoginWindow test2 = new LoginWindow();
             test2.setBounds(700, 200, 500, 350);
             test2.getContentPane().setBackground(Color.BLACK);
+
             test2.setForeground(Color.WHITE);
 
-            tastierino test4 = new tastierino();
-            test4.setBounds(700, 200, 500, 350);
-            test4.getContentPane().setBackground(Color.BLACK);
-
-
         } else if (e.getActionCommand().equals("bottone2")) {
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            Registrazione test3 = new Registrazione();
-            test3.setBounds(700, 200, 600, 450);
+
+            SignUpWindow test3 = new SignUpWindow();
+            test3.setBounds(700, 200, 500, 350);
             test3.getContentPane().setBackground(Color.BLACK);
 
             test3.setForeground(Color.WHITE);
 
+        } else if (e.getActionCommand().equals("bottone3")) {
+
+            SignUpWindow test3 = new SignUpWindow();
+            test3.setBounds(700, 200, 500, 350);
+            test3.getContentPane().setBackground(Color.BLACK);
+
+            test3.setForeground(Color.WHITE);
 
         }
     }
@@ -140,3 +143,4 @@ public class Frame extends JFrame implements ActionListener, WindowListener {
 
 
 }
+
