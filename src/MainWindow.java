@@ -3,105 +3,84 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class MainWindow extends JFrame implements ActionListener, WindowListener {
+    JPanel JPanel_top = new JPanel();
+    JPanel JPanel_bottom = new JPanel();
 
-    int placeholder;
-    JLabel testo1 = new JLabel("Premi 'Accedi' per effettuare il login ");
-    JLabel testo2 = new JLabel("'Registrati' per effettuare la registrazione");
+    JLabel loginString = new JLabel("Premi 'Accedi' per effettuare il login ");
+    JLabel registerString = new JLabel("'Registrati' per effettuare la registrazione");
 
-
-    JButton bottone1 = new JButton("Accedi");
-    JButton bottone2 = new JButton("Registrati");
-
+    JButton button_login = new JButton("Accedi");
+    JButton button_register = new JButton("Registrati");
 
     public MainWindow() {
-        super("Verifica di informatica Casti Michele 4C");
-        Container c = this.getContentPane();
+        super("Destinazione: ");
 
+        Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
-        JPanel superiore = new JPanel();
-        JPanel inferiore = new JPanel();
 
-        superiore.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        superiore.setLayout(new GridLayout(2, 1));
-        superiore.setBackground(Color.CYAN);
+        JPanel_top.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel_top.setLayout(new GridLayout(2, 1));
 
-        inferiore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inferiore.setLayout(new GridLayout(1, 2));
+        JPanel_bottom.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JPanel_bottom.setLayout(new GridLayout(1, 2));
 
 
-        bottone1.addActionListener(this);
-        bottone1.setActionCommand("bottone1");
-        bottone2.addActionListener(this);
-        bottone2.setActionCommand("bottone2");
+        button_login.addActionListener(this);
+        button_login.setActionCommand("login");
+        button_register.addActionListener(this);
+        button_register.setActionCommand("register");
+
+
+        loginString.setFont(new Font("Arial", Font.BOLD, 16));
+        loginString.setOpaque(true);
+        registerString.setFont(new Font("Arial", Font.BOLD, 16));
+        registerString.setOpaque(true);
+
+
+//        Content pane declaration
+        JPanel_top.add(loginString);
+        JPanel_top.add(registerString);
+        c.add(JPanel_top);
+
+
+        JPanel_bottom.add(button_login);
+        JPanel_bottom.add(button_register);
+        c.add(JPanel_bottom);
 
         this.pack();
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
         this.addWindowListener(this);
-
-        testo1.setFont(new Font("Arial", Font.BOLD, 16));
-        testo1.setBackground(Color.CYAN);
-        testo1.setOpaque(true);
-        testo2.setFont(new Font("Arial", Font.BOLD, 16));
-        testo2.setOpaque(true);
-        testo2.setBackground(Color.CYAN);
-
-
-        superiore.add(testo1);
-        superiore.add(testo2);
-
-        c.add(superiore);
-
-
-        inferiore.add(bottone1);
-        inferiore.add(bottone2);
-
-
-        c.add(inferiore);
-
-
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        if (e.getActionCommand().equals("bottone1")) {
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            LoginWindow test2 = new LoginWindow();
-            test2.setBounds(700, 200, 500, 350);
-            test2.getContentPane().setBackground(Color.BLACK);
-            test2.setForeground(Color.WHITE);
+        if (e.getActionCommand().equals("login")) {
+            LoginWindow w = new LoginWindow();
+            w.setBounds(700, 200, 500, 350);
 
-            KeypadWindow test4 = new KeypadWindow();
-            test4.setBounds(700, 200, 500, 350);
-            test4.getContentPane().setBackground(Color.BLACK);
+//            KeypadWindow test4 = new KeypadWindow();
+//            test4.setBounds(700, 200, 500, 350);
+//            test4.getContentPane().setBackground(Color.BLACK);
 
 
-        } else if (e.getActionCommand().equals("bottone2")) {
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            SignUpWindow test3 = new SignUpWindow();
-            test3.setBounds(700, 200, 600, 450);
-            test3.getContentPane().setBackground(Color.BLACK);
+        } else if (e.getActionCommand().equals("register")) {
+            SignUpWindow w = new SignUpWindow();
+            w.setBounds(700, 200, 600, 450);
 
-            test3.setForeground(Color.WHITE);
-
-
+//            KeypadWindow w = new KeypadWindow();
+//            w.setBounds(700, 200, 350, 400);
         }
     }
 
 
     @Override
     public void windowOpened(WindowEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        // TODO Auto-generated method stub
-        // TODO Auto-generated method stub
         int r = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler uscire?", "messaggio importante", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             System.exit(0);
@@ -110,7 +89,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     @Override
     public void windowClosed(WindowEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -137,6 +115,4 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         // TODO Auto-generated method stub
 
     }
-
-
 }

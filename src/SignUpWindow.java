@@ -1,150 +1,142 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class SignUpWindow extends JFrame implements ActionListener, WindowListener {
-    //nome,cognome,sesso,provincia,città;
+    JPanel JPanel_top = new JPanel();
+    JPanel JPanel_bottom = new JPanel();
 
-    String[] dati = {null, null, null, null, null};
-    JLabel testo1 = new JLabel("Username");
-    JLabel testo2 = new JLabel("Password");
-    JLabel testo3 = new JLabel("Conferma Password");
-    JLabel testo4 = new JLabel("Nome");
-    JLabel testo5 = new JLabel("Cognome");
-    JTextField num1 = new JTextField("");
-    JTextField num2 = new JTextField("");
-    JTextField num3 = new JTextField("");
-    JTextField num4 = new JTextField("");
-    JTextField num5 = new JTextField("");
-    JButton bottone2 = new JButton("invio");
-    JButton bottone3 = new JButton("Annulla");
-    JRadioButton uno = new JRadioButton("maschio");
-    JRadioButton due = new JRadioButton("femmina");
+    JLabel label_fName = new JLabel("Nome");
+    JLabel label_lName = new JLabel("Cognome");
+    JLabel label_username = new JLabel("Username");
+    JLabel label_password = new JLabel("Password");
+    JLabel label_confirm = new JLabel("Conferma Password");
 
-    JLabel testo6 = new JLabel("Provincia");
-    String[] tre = {"Selargius", "Cagliari", "Villasor", "Domus de Maria", "Napoli"};
-    JComboBox quattro = new JComboBox(tre);
-    JLabel testo7 = new JLabel("Città");
-    JTextField num6 = new JTextField("");
+    JTextField field_fName = new JTextField();
+    JTextField field_lName = new JTextField();
+    JTextField field_username = new JTextField();
+    JTextField field_password = new JTextField();
+    JTextField field_confirm = new JTextField();
+
+    ButtonGroup buttonGroup_gender = new ButtonGroup();
+    JRadioButton radioButton_male = new JRadioButton("Maschio");
+    JRadioButton radioButton_female = new JRadioButton("Femmina");
+
+    JButton button_confirm = new JButton("Invia");
+    JButton button_cancel = new JButton("Annulla");
+
+
+    JLabel label_province = new JLabel("Provincia");
+    String[] array_province = {"Selargius", "Cagliari", "Villasor", "Domus de Maria", "Napoli"};
+    JComboBox<String> combobox_province = new JComboBox<>(array_province);
+
+    JLabel label_city = new JLabel("Città");
+    JTextField field_city = new JTextField();
 
     public SignUpWindow() {
         super("Crea nuovo Account");
 
         Container c = this.getContentPane();
-
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
-        JPanel superiore = new JPanel();
-        JPanel inferiore = new JPanel();
+//        JPanels layout declaration
+        JPanel_top.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel_top.setLayout(new GridLayout(8, 2, 10, 10));
 
-        superiore.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        superiore.setLayout(new GridLayout(8, 2, 10, 10));
-        superiore.setBackground(Color.GRAY);
+        JPanel_bottom.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JPanel_bottom.setLayout(new GridLayout(2, 2));
 
-        inferiore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        inferiore.setLayout(new GridLayout(2, 2));
+//        Top panel components
+        JPanel_top.add(label_fName);
+        JPanel_top.add(field_fName);
 
-        ButtonGroup bottoni = new ButtonGroup();
-        bottoni.add(uno);
-        bottoni.add(due);
+        JPanel_top.add(label_lName);
+        JPanel_top.add(field_lName);
 
-        uno.setBackground(Color.GRAY);
-        bottone2.addActionListener(this);
-        bottone2.setActionCommand("bottone2");
-        due.setBackground(Color.GRAY);
-        due.addActionListener(this);
-        due.setActionCommand("due");
-        uno.addActionListener(this);
-        uno.setActionCommand("uno");
+        JPanel_top.add(label_username);
+        JPanel_top.add(field_username);
+
+        JPanel_top.add(label_password);
+        JPanel_top.add(field_password);
+
+        JPanel_top.add(label_confirm);
+        JPanel_top.add(field_confirm);
+
+
+        radioButton_male.setActionCommand("Maschio");
+        radioButton_female.setActionCommand("Femmina");
+        buttonGroup_gender.add(radioButton_male);
+        buttonGroup_gender.add(radioButton_female);
+        JPanel_top.add(radioButton_male);
+        JPanel_top.add(radioButton_female);
+
+        JPanel_top.add(label_province);
+        JPanel_top.add(combobox_province);
+
+        JPanel_top.add(label_city);
+        JPanel_top.add(field_city);
+
+        c.add(JPanel_top);
+
+//        Bottom panel components
+        button_confirm.addActionListener(this);
+        button_confirm.setActionCommand("confirm");
+        JPanel_bottom.add(button_confirm);
+
+        button_cancel.addActionListener(this);
+        button_cancel.setActionCommand("cancel");
+        JPanel_bottom.add(button_cancel);
+
+        c.add(JPanel_bottom);
+
+//        Window settings
         this.pack();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
         this.addWindowListener(this);
-
-        testo1.setFont(new Font("Arial", Font.BOLD, 16));
-        testo2.setFont(new Font("Arial", Font.BOLD, 16));
-
-
-        superiore.add(testo1);
-        superiore.add(num1);
-        superiore.add(testo2);
-        superiore.add(num2);
-        superiore.add(testo3);
-        superiore.add(num3);
-        superiore.add(testo4);
-        superiore.add(num4);
-        superiore.add(testo5);
-        superiore.add(num5);
-        superiore.add(uno);
-        superiore.add(due);
-        superiore.add(testo6);
-        superiore.add(quattro);
-        superiore.add(testo7);
-        superiore.add(num6);
-        c.add(superiore);
-
-        inferiore.add(bottone2);
-        inferiore.add(bottone3);
-        c.add(inferiore);
-
-
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        boolean errore = false;
-        String InputSuFileStringa;
-        if (e.getActionCommand().equals("bottone1")) {
-//               if ( num1.()){
-//               tastierino test4 = new tastierino();
-//                   test4.setBounds(700, 200, 500, 350);
-//                  test4.getContentPane().setBackground(Color.BLACK);
-//             while(password<6){
-//
-//             }
-//               }
-            dati[1] = String.valueOf(Float.parseFloat(num1.getText()));
-            dati[2] = String.valueOf(Float.parseFloat(num2.getText()));
-            if (bottone2.isSelected()) {
-                dati[3] = "maschio";
-            } else
-                dati[3] = "femmina";
+        if (e.getActionCommand().equals("confirm")) {
+            if (field_fName.getText().isEmpty() || field_lName.getText().isEmpty() || field_username.getText().isEmpty() || field_password.getText().isEmpty() || field_confirm.getText().isEmpty() || buttonGroup_gender.getSelection() == null || field_city.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Completa tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (field_password.getText().equals(field_confirm.getText())) {
+                    System.out.println("Nome: " + field_fName.getText());
+                    System.out.println("Cognome: " + field_lName.getText());
+                    System.out.println("Username: " + field_username.getText());
+                    System.out.println("Password: " + field_password.getText());
+                    System.out.println("Conferma Password: " + field_confirm.getText());
+                    System.out.println("ahah sex: " + buttonGroup_gender.getSelection().getActionCommand());
+                    System.out.println("Provincia: " + combobox_province.getSelectedItem());
+                    System.out.println("Città: " + field_city.getText());
+                    JOptionPane.showMessageDialog(this, "Registrazione effettuata con successo", "Successo", JOptionPane.INFORMATION_MESSAGE);
 
-            dati[4] = String.valueOf(Float.parseFloat(num1.getText()));
-            dati[5] = String.valueOf(Float.parseFloat(num1.getText()));
-
-//            scriviSuFile=new PrintWriter(new FileOutputStream(nomeFile,true));
-//            for(int i=0;i<9;i++){
-//                        inputSuFileStringa=inputSuFileStringa+" "+inputString[i];
-//                         System.out.println(inputString[i]);
-//            }
+                    new KeypadWindow();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Le password non corrispondono", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
 
-        if (e.getActionCommand().equals("bottone2")) {
-            System.exit(0);
-
-
+        if (e.getActionCommand().equals("cancel")) {
+            this.dispose();
         }
     }
 
 
     @Override
     public void windowOpened(WindowEvent e) {
-
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        int r = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler uscire?", "messaggio importante", JOptionPane.YES_NO_OPTION);
-        if (r == JOptionPane.YES_OPTION) {
-            System.exit(0);
-            LoginWindow test2 = new LoginWindow();
-            test2.setBounds(700, 200, 500, 350);
-            test2.getContentPane().setBackground(Color.BLACK);
-
-            test2.setForeground(Color.WHITE);
-        }
+        this.dispose();
     }
 
     @Override
@@ -176,8 +168,4 @@ public class SignUpWindow extends JFrame implements ActionListener, WindowListen
         // TODO Auto-generated method stub
 
     }
-
-
 }
-
-
