@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.*;
 
 public class SignUpWindow extends JFrame implements ActionListener, WindowListener {
     JPanel JPanel_top = new JPanel();
@@ -115,6 +116,28 @@ public class SignUpWindow extends JFrame implements ActionListener, WindowListen
                     System.out.println("ahah sex: " + buttonGroup_gender.getSelection().getActionCommand());
                     System.out.println("Provincia: " + combobox_province.getSelectedItem());
                     System.out.println("Città: " + field_city.getText());
+
+
+                    try {
+                        FileWriter fw = new FileWriter("users.txt", true);
+                        fw.write(String.format(
+                                "%s,%s,%s,%s,%s,%s,%s",
+                                field_fName.getText(),
+                                field_lName.getText(),
+                                field_username.getText(),
+                                field_password.getText(),
+                                buttonGroup_gender.getSelection().getActionCommand(),
+                                combobox_province.getSelectedItem(),
+                                field_city.getText()
+                            )
+                        );
+                        fw.write(System.lineSeparator());
+                        fw.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+
                     JOptionPane.showMessageDialog(this, "Registrazione effettuata con successo", "Successo", JOptionPane.INFORMATION_MESSAGE);
 
                     new KeypadWindow();
