@@ -5,8 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
+import java.util.Objects;
 
-public class SignUpWindow extends JFrame implements ActionListener, WindowListener {
+public class SignUpWindow extends JFrame implements ActionListener, WindowListener, KeypadListener {
+    String pin;
+
     JPanel JPanel_top = new JPanel();
     JPanel JPanel_bottom = new JPanel();
 
@@ -19,8 +22,8 @@ public class SignUpWindow extends JFrame implements ActionListener, WindowListen
     JTextField field_fName = new JTextField();
     JTextField field_lName = new JTextField();
     JTextField field_username = new JTextField();
-    JTextField field_password = new JTextField();
-    JTextField field_confirm = new JTextField();
+    JPasswordField field_password = new JPasswordField();
+    JPasswordField field_confirm = new JPasswordField();
 
     ButtonGroup buttonGroup_gender = new ButtonGroup();
     JRadioButton radioButton_male = new JRadioButton("Maschio");
@@ -38,7 +41,7 @@ public class SignUpWindow extends JFrame implements ActionListener, WindowListen
     JTextField field_city = new JTextField();
 
     public SignUpWindow() {
-        super("Crea nuovo Account");
+        super("Registrazione");
 
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
@@ -101,49 +104,61 @@ public class SignUpWindow extends JFrame implements ActionListener, WindowListen
         this.addWindowListener(this);
     }
 
+    public void writeToFile() {
+        String _fName = field_fName.getText().substring(0, 1).toUpperCase() + field_fName.getText().substring(1).toLowerCase();
+        String _lName = field_lName.getText().substring(0, 1).toUpperCase() + field_lName.getText().substring(1).toLowerCase();
+        String _username = field_username.getText();
+        String _password = new String(field_password.getPassword());
+        String _gender = buttonGroup_gender.getSelection().getActionCommand();
+        String _province = Objects.requireNonNull(combobox_province.getSelectedItem()).toString();
+        String _city = field_city.getText().substring(0, 1).toUpperCase() + field_city.getText().substring(1).toLowerCase();
+
+        try {
+            FileWriter fw = new FileWriter("users.txt", true);
+            fw.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s", _fName, _lName, _username, _password, _gender, _province, _city, pin));
+            fw.write(System.lineSeparator());
+            fw.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Override
+    public void onKeypadResult(String result) {
+        pin = result;
+        System.out.println("PIN: " + pin);
+        writeToFile();
+        this.dispose();
+    }
+
+    public boolean checkUsername(String username) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[2].equals(username)) {
+                    return true;
+                }
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return false;
+    }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("confirm")) {
-            if (field_fName.getText().isEmpty() || field_lName.getText().isEmpty() || field_username.getText().isEmpty() || field_password.getText().isEmpty() || field_confirm.getText().isEmpty() || buttonGroup_gender.getSelection() == null || field_city.getText().isEmpty()) {
+            if (field_fName.getText().isEmpty() || field_lName.getText().isEmpty() || field_username.getText().isEmpty() || new String(field_password.getPassword()).isEmpty() || new String(field_confirm.getPassword()).isEmpty() || buttonGroup_gender.getSelection() == null || field_city.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Completa tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
+            } else if (!new String(field_password.getPassword()).equals(new String(field_confirm.getPassword()))) {
+                JOptionPane.showMessageDialog(this, "Le password non corrispondono", "Errore", JOptionPane.ERROR_MESSAGE);
+            } else if (new String(field_password.getPassword()).length() < 8) {
+                JOptionPane.showMessageDialog(this, "La password deve contenere almeno 8 caratteri", "Errore", JOptionPane.ERROR_MESSAGE);
+            } else if (checkUsername(field_username.getText())) {
+                JOptionPane.showMessageDialog(this, "Username già esistente", "Errore", JOptionPane.ERROR_MESSAGE);
             } else {
-                if (field_password.getText().equals(field_confirm.getText())) {
-                    System.out.println("Nome: " + field_fName.getText());
-                    System.out.println("Cognome: " + field_lName.getText());
-                    System.out.println("Username: " + field_username.getText());
-                    System.out.println("Password: " + field_password.getText());
-                    System.out.println("Conferma Password: " + field_confirm.getText());
-                    System.out.println("ahah sex: " + buttonGroup_gender.getSelection().getActionCommand());
-                    System.out.println("Provincia: " + combobox_province.getSelectedItem());
-                    System.out.println("Città: " + field_city.getText());
-
-
-                    try {
-                        FileWriter fw = new FileWriter("users.txt", true);
-                        fw.write(String.format(
-                                "%s,%s,%s,%s,%s,%s,%s",
-                                field_fName.getText(),
-                                field_lName.getText(),
-                                field_username.getText(),
-                                field_password.getText(),
-                                buttonGroup_gender.getSelection().getActionCommand(),
-                                combobox_province.getSelectedItem(),
-                                field_city.getText()
-                            )
-                        );
-                        fw.write(System.lineSeparator());
-                        fw.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-
-                    JOptionPane.showMessageDialog(this, "Registrazione effettuata con successo", "Successo", JOptionPane.INFORMATION_MESSAGE);
-
-                    new KeypadWindow();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Le password non corrispondono", "Errore", JOptionPane.ERROR_MESSAGE);
-                }
+                new KeypadWindow(this, this, false);
             }
         }
 

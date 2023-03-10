@@ -1,8 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.*;
 
-public class LoginWindow extends JFrame implements ActionListener, WindowListener {
+public class LoginWindow extends JFrame implements ActionListener, WindowListener, KeypadListener {
+    String keypadPin;
     JPanel JPanel_top = new JPanel();
     JPanel JPanel_bottom = new JPanel();
 
@@ -10,13 +14,13 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
     JLabel label_password = new JLabel("Password");
 
     JTextField field_username = new JTextField();
-    JTextField field_password = new JTextField();
+    JPasswordField field_password = new JPasswordField();
 
     JButton button_confirm = new JButton("Invio");
     JButton button_cancel = new JButton("Annulla");
 
     public LoginWindow() {
-        super("Verifica di informatica Casti Michele 4C");
+        super("Login");
 
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
@@ -37,8 +41,8 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
 
         label_username.setFont(new Font("Arial", Font.BOLD, 16));
         label_password.setFont(new Font("Arial", Font.BOLD, 16));
-        field_username.setFont(new Font("Arial", Font.BOLD, 10));
-        field_password.setFont(new Font("Arial", Font.BOLD, 10));
+        field_username.setFont(new Font("Arial", Font.BOLD, 16));
+        field_password.setFont(new Font("Arial", Font.BOLD, 16));
 
 
         JPanel_top.add(label_username);
@@ -59,9 +63,69 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
         this.addWindowListener(this);
     }
 
+    private boolean checkCredentials() {
+        boolean user_state = true;
+        boolean pw_state = true;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[2].equals(field_username.getText())) {
+                    user_state = false;
+                }
+                if (data[3].equals(new String(field_password.getPassword()))) {
+                    pw_state = false;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return !user_state && !pw_state;
+    }
+
+    private String getPin() {
+        String pin = null;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[2].equals(field_username.getText())) {
+                    if (data[3].equals(new String(field_password.getPassword()))) {
+                        pin = data[7];
+                        System.out.println(pin);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return pin;
+    }
+
+    private void checkPin() {
+        if (keypadPin.equals(getPin())) {
+            new LoggedInWindow(field_username.getText());
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Pin errato", "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getActionCommand().equals("confirm")) {
+            if (checkCredentials()) {
+                new KeypadWindow(this, this, true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Username o password errati", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (e.getActionCommand().equals("cancel")) {
+            this.dispose();
+        }
     }
 
 
@@ -104,5 +168,12 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
     public void windowDeactivated(WindowEvent e) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void onKeypadResult(String result) {
+        keypadPin = result;
+        System.out.println("Pin: " + keypadPin);
+        checkPin();
     }
 }

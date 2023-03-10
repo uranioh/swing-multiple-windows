@@ -13,7 +13,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     JButton button_register = new JButton("Registrati");
 
     public MainWindow() {
-        super("Destinazione: ");
+        super("Destinazione: esse punto anna resi");
 
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
@@ -59,18 +59,9 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         if (e.getActionCommand().equals("login")) {
             LoginWindow w = new LoginWindow();
             w.setBounds(700, 200, 500, 350);
-
-//            KeypadWindow test4 = new KeypadWindow();
-//            test4.setBounds(700, 200, 500, 350);
-//            test4.getContentPane().setBackground(Color.BLACK);
-
-
         } else if (e.getActionCommand().equals("register")) {
             SignUpWindow w = new SignUpWindow();
             w.setBounds(700, 200, 600, 450);
-
-//            KeypadWindow w = new KeypadWindow();
-//            w.setBounds(700, 200, 350, 400);
         }
     }
 
@@ -89,30 +80,21 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 
     @Override
     public void windowClosed(WindowEvent e) {
-
     }
 
     @Override
     public void windowIconified(WindowEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void windowDeiconified(WindowEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void windowActivated(WindowEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void windowDeactivated(WindowEvent e) {
-        // TODO Auto-generated method stub
-
     }
 }

@@ -2,14 +2,22 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class KeypadWindow extends JFrame implements ActionListener, WindowListener {
+public class KeypadWindow extends JDialog implements ActionListener, WindowListener {
+    private final KeypadListener listener;
+    boolean isLogin;
+
     JPanel JPanel_top = new JPanel();
     JPanel JPanel_bottom = new JPanel();
 
     JTextField display = new JTextField(5);
     JButton[][] keypad = new JButton[4][3];
 
-    public KeypadWindow() {
+    public KeypadWindow(Frame owner, KeypadListener listener, boolean isLogin) {
+        super(owner, "PIN", true);
+        this.listener = listener;
+
+        this.isLogin = isLogin;
+
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
@@ -32,6 +40,7 @@ public class KeypadWindow extends JFrame implements ActionListener, WindowListen
         keypad[3][0] = new JButton("C");
         keypad[3][1] = new JButton("0");
         keypad[3][2] = new JButton("OK");
+        keypad[3][2].setEnabled(false);
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
@@ -60,12 +69,13 @@ public class KeypadWindow extends JFrame implements ActionListener, WindowListen
         c.add(JPanel_top);
         c.add(JPanel_bottom);
 
-
-        this.pack();
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setVisible(true);
-        this.setResizable(false);
-        this.addWindowListener(this);
+        JDialog d = new JDialog(this, "PIN", true);
+        d.add(c);
+        d.pack();
+        d.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        d.setVisible(true);
+        d.setResizable(false);
+        d.addWindowListener(this);
     }
 
     @Override
@@ -73,10 +83,25 @@ public class KeypadWindow extends JFrame implements ActionListener, WindowListen
         String cmd = e.getActionCommand();
         if (cmd.equals("OK")) {
             System.out.println("OK");
+
+            if (isLogin) {
+                listener.onKeypadResult(display.getText());
+            } else {
+                listener.onKeypadResult(display.getText());
+                this.dispose();
+            }
+
         } else if (cmd.equals("C")) {
+            keypad[3][2].setEnabled(false);
             display.setText("");
         } else {
-            display.setText(display.getText() + cmd);
+            if (display.getText().length() < 6) {
+                display.setText(display.getText() + cmd);
+            }
+
+            if (display.getText().length() == 6) {
+                keypad[3][2].setEnabled(true);
+            }
         }
     }
 
