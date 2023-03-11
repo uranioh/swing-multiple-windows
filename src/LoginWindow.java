@@ -5,13 +5,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.*;
 
-public class LoginWindow extends JFrame implements ActionListener, WindowListener, KeypadListener {
+import static javax.swing.SwingConstants.RIGHT;
+
+public class LoginWindow extends JDialog implements ActionListener, WindowListener, KeypadListener {
+    private final JFrame parentFrame;
+
     String keypadPin;
     JPanel JPanel_top = new JPanel();
     JPanel JPanel_bottom = new JPanel();
 
-    JLabel label_username = new JLabel("Username");
-    JLabel label_password = new JLabel("Password");
+    JLabel label_username = new JLabel("Username", RIGHT);
+    JLabel label_password = new JLabel("Password", RIGHT);
 
     JTextField field_username = new JTextField();
     JPasswordField field_password = new JPasswordField();
@@ -19,17 +23,18 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
     JButton button_confirm = new JButton("Invio");
     JButton button_cancel = new JButton("Annulla");
 
-    public LoginWindow() {
-        super("Login");
+    public LoginWindow(Frame parent) {
+        super(parent, "Login", true);
+        parentFrame = (JFrame) parent;
 
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
         JPanel_top.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JPanel_top.setLayout(new GridLayout(2, 1));
+        JPanel_top.setLayout(new GridLayout(2, 1, 10, 10));
 
-        JPanel_bottom.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JPanel_bottom.setLayout(new GridLayout(1, 3));
+        JPanel_bottom.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel_bottom.setLayout(new GridLayout(1, 3, 10, 10));
 
 
         button_confirm.addActionListener(this);
@@ -37,12 +42,6 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
 
         button_cancel.addActionListener(this);
         button_cancel.setActionCommand("cancel");
-
-
-        label_username.setFont(new Font("Arial", Font.BOLD, 16));
-        label_password.setFont(new Font("Arial", Font.BOLD, 16));
-        field_username.setFont(new Font("Arial", Font.BOLD, 16));
-        field_password.setFont(new Font("Arial", Font.BOLD, 16));
 
 
         JPanel_top.add(label_username);
@@ -56,11 +55,12 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
         JPanel_bottom.add(button_cancel);
         c.add(JPanel_bottom);
 
-        this.pack();
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setVisible(true);
-        this.setResizable(false);
-        this.addWindowListener(this);
+        addWindowListener(this);
+
+        setSize(300, 200);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
     }
 
     private boolean checkCredentials() {
@@ -96,7 +96,6 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
                 if (data[2].equals(field_username.getText())) {
                     if (data[3].equals(new String(field_password.getPassword()))) {
                         pin = data[7];
-                        System.out.println(pin);
                     }
                 }
             }
@@ -109,8 +108,9 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
 
     private void checkPin() {
         if (keypadPin.equals(getPin())) {
-            new LoggedInWindow(field_username.getText());
+            new LoggedInWindow(field_username.getText()).setSize(300, 400);
             this.dispose();
+            parentFrame.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Pin errato", "Errore", JOptionPane.ERROR_MESSAGE);
         }
@@ -173,7 +173,6 @@ public class LoginWindow extends JFrame implements ActionListener, WindowListene
     @Override
     public void onKeypadResult(String result) {
         keypadPin = result;
-        System.out.println("Pin: " + keypadPin);
         checkPin();
     }
 }

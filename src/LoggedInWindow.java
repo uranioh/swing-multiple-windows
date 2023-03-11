@@ -4,21 +4,21 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static javax.swing.SwingConstants.RIGHT;
+
 public class LoggedInWindow extends JFrame {
     String loggedUsername;
 
     JPanel main = new JPanel();
 
-    JLabel label_welcome = new JLabel("Benvenuto");
-
-    JLabel label_fName = new JLabel("Nome");
-    JLabel label_lName = new JLabel("Cognome");
-    JLabel label_username = new JLabel("Username");
-    JLabel label_password = new JLabel("Password");
-    JLabel label_gender = new JLabel("Sesso");
-    JLabel label_province = new JLabel("Provincia");
-    JLabel label_city = new JLabel("Città");
-    JLabel label_pin = new JLabel("PIN");
+    JLabel label_fName = new JLabel("Nome", RIGHT);
+    JLabel label_lName = new JLabel("Cognome", RIGHT);
+    JLabel label_username = new JLabel("Username", RIGHT);
+    JLabel label_password = new JLabel("Password", RIGHT);
+    JLabel label_gender = new JLabel("Sesso", RIGHT);
+    JLabel label_province = new JLabel("Provincia", RIGHT);
+    JLabel label_city = new JLabel("Città", RIGHT);
+    JLabel label_pin = new JLabel("PIN", RIGHT);
 
 
     JTextField field_fName = new JTextField();
@@ -71,6 +71,8 @@ public class LoggedInWindow extends JFrame {
 
         c.add(main);
 
+        setLocationRelativeTo(null);
+        setSize(600, 800);
         this.pack();
         this.setVisible(true);
     }

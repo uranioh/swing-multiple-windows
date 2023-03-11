@@ -6,41 +6,49 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     JPanel JPanel_top = new JPanel();
     JPanel JPanel_bottom = new JPanel();
 
-    JLabel loginString = new JLabel("Premi 'Accedi' per effettuare il login ");
-    JLabel registerString = new JLabel("'Registrati' per effettuare la registrazione");
+    JLabel description = new JLabel("""
+            <html>
+                <h1>Benvenuto</h1>
+                <p>Progetto di <b>Alessandro Melis</b>, <b>Michele Casti</b> ed <b>Elena Sarigu</b></p>
+                
+                <h2>Per continuare, accedi o registrati.</h2>
+            </html>
+            """);
+
+    JLabel cat = new JLabel("""
+            <html>
+                <img src="https://media.tenor.com/SaLG0Kb6zy4AAAAd/oh-the-misery-cat-oh-the-misery-everybody-wants-to-be-my-enemy.gif" alt="cat" width="100" height="100">
+            </html>
+            """);
 
     JButton button_login = new JButton("Accedi");
     JButton button_register = new JButton("Registrati");
 
     public MainWindow() {
-        super("Destinazione: esse punto anna resi");
+        super("java-multiple-windows");
 
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
 
-        JPanel_top.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel_top.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         JPanel_top.setLayout(new GridLayout(2, 1));
 
-        JPanel_bottom.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JPanel_bottom.setLayout(new GridLayout(1, 2));
+        JPanel_bottom.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        JPanel_bottom.setLayout(new GridLayout(1, 2, 10, 10));
 
 
         button_login.addActionListener(this);
         button_login.setActionCommand("login");
+        button_login.setFocusable(false);
+
+
         button_register.addActionListener(this);
         button_register.setActionCommand("register");
-
-
-        loginString.setFont(new Font("Arial", Font.BOLD, 16));
-        loginString.setOpaque(true);
-        registerString.setFont(new Font("Arial", Font.BOLD, 16));
-        registerString.setOpaque(true);
-
-
+        button_register.setFocusable(false);
 //        Content pane declaration
-        JPanel_top.add(loginString);
-        JPanel_top.add(registerString);
+        JPanel_top.add(description);
+        JPanel_top.add(cat);
         c.add(JPanel_top);
 
 
@@ -48,20 +56,20 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
         JPanel_bottom.add(button_register);
         c.add(JPanel_bottom);
 
+        this.addWindowListener(this);
+
         this.pack();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
-        this.addWindowListener(this);
     }
 
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("login")) {
-            LoginWindow w = new LoginWindow();
-            w.setBounds(700, 200, 500, 350);
+            new LoginWindow(this);
         } else if (e.getActionCommand().equals("register")) {
-            SignUpWindow w = new SignUpWindow();
-            w.setBounds(700, 200, 600, 450);
+            new SignUpWindow(this);
         }
     }
 

@@ -12,10 +12,10 @@ public class KeypadWindow extends JDialog implements ActionListener, WindowListe
     JTextField display = new JTextField(5);
     JButton[][] keypad = new JButton[4][3];
 
-    public KeypadWindow(Frame owner, KeypadListener listener, boolean isLogin) {
+    public KeypadWindow(Dialog owner, KeypadListener listener, boolean isLogin) {
         super(owner, "PIN", true);
-        this.listener = listener;
 
+        this.listener = listener;
         this.isLogin = isLogin;
 
         Container c = this.getContentPane();
@@ -69,28 +69,19 @@ public class KeypadWindow extends JDialog implements ActionListener, WindowListe
         c.add(JPanel_top);
         c.add(JPanel_bottom);
 
-        JDialog d = new JDialog(this, "PIN", true);
-        d.add(c);
-        d.pack();
-        d.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        d.setVisible(true);
-        d.setResizable(false);
-        d.addWindowListener(this);
+        addWindowListener(this);
+
+        setLocationRelativeTo(null);
+        pack();
+        setVisible(true);
+        setResizable(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
         if (cmd.equals("OK")) {
-            System.out.println("OK");
-
-            if (isLogin) {
-                listener.onKeypadResult(display.getText());
-            } else {
-                listener.onKeypadResult(display.getText());
-                this.dispose();
-            }
-
+            listener.onKeypadResult(display.getText());
         } else if (cmd.equals("C")) {
             keypad[3][2].setEnabled(false);
             display.setText("");

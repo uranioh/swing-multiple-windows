@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea2343a5-4325-4843-9428-5ca3ed9d46d2" name="Changes" comment="added some filewriter shit">
-      <change afterPath="$PROJECT_DIR$/src/KeypadListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/LoggedInWindow.java" afterDir="false" />
+    <list default="true" id="ea2343a5-4325-4843-9428-5ca3ed9d46d2" name="Changes" comment="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KeypadWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeypadWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoggedInWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoggedInWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SignUpWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SignUpWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/users.txt" afterDir="false" />
@@ -72,7 +72,8 @@
       <workItem from="1675244856149" duration="829000" />
       <workItem from="1678295776896" duration="4032000" />
       <workItem from="1678382870733" duration="2718000" />
-      <workItem from="1678463596031" duration="10220000" />
+      <workItem from="1678463596031" duration="10551000" />
+      <workItem from="1678551738123" duration="8071000" />
     </task>
     <task id="LOCAL-00001" summary="literally everything">
       <created>1678299690173</created>
@@ -88,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678385983749</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable">
+      <created>1678474011160</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678474011160</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,7 +117,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="literally everything" />
     <MESSAGE value="added some filewriter shit" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some filewriter shit" />
+    <MESSAGE value="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
