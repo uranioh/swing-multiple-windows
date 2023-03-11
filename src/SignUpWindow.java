@@ -119,7 +119,7 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
         String _city = field_city.getText().substring(0, 1).toUpperCase() + field_city.getText().substring(1).toLowerCase();
 
         try {
-            FileWriter fw = new FileWriter("users.txt", true);
+            FileWriter fw = new FileWriter("src/users.txt", true);
             fw.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s", _fName, _lName, _username, _password, _gender, _province, _city, pin));
             fw.write(System.lineSeparator());
             fw.close();
@@ -137,7 +137,7 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
 
     public boolean checkUsername(String username) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/users.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");

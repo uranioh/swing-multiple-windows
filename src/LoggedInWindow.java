@@ -79,7 +79,7 @@ public class LoggedInWindow extends JFrame {
 
     public void setFields() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/users.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");

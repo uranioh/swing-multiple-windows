@@ -68,7 +68,7 @@ public class LoginWindow extends JDialog implements ActionListener, WindowListen
         boolean pw_state = true;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/users.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
@@ -89,7 +89,7 @@ public class LoginWindow extends JDialog implements ActionListener, WindowListen
     private String getPin() {
         String pin = null;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/users.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
