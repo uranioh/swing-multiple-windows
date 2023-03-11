@@ -73,6 +73,7 @@ public class LoggedInWindow extends JFrame {
 
         setLocationRelativeTo(null);
         setSize(600, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
     }
