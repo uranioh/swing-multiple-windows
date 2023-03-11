@@ -40,6 +40,17 @@ public class LoggedInWindow extends JFrame {
 
         setFields();
 
+        main.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        field_fName.setEditable(false);
+        field_lName.setEditable(false);
+        field_username.setEditable(false);
+        field_password.setEditable(false);
+        field_gender.setEditable(false);
+        field_province.setEditable(false);
+        field_city.setEditable(false);
+        field_pin.setEditable(false);
+
         main.setLayout(new GridLayout(8, 2, 10, 10));
         main.add(label_fName);
         main.add(field_fName);
