@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea2343a5-4325-4843-9428-5ca3ed9d46d2" name="Changes" comment="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable">
+    <list default="true" id="ea2343a5-4325-4843-9428-5ca3ed9d46d2" name="Changes" comment="I should stop making single lined commits">
+      <change afterPath="$PROJECT_DIR$/src/images/cat.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/dog.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KeypadWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeypadWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LoggedInWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoggedInWindow.java" afterDir="false" />
@@ -12,7 +14,7 @@
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SignUpWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SignUpWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/users.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,20 +40,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last.edited.regexp": "",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alessandro\IdeaProjects\swing-multiple-windows\src\images" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Minca" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -73,7 +81,8 @@
       <workItem from="1678295776896" duration="4032000" />
       <workItem from="1678382870733" duration="2718000" />
       <workItem from="1678463596031" duration="10551000" />
-      <workItem from="1678551738123" duration="8071000" />
+      <workItem from="1678551738123" duration="8466000" />
+      <workItem from="1678611662885" duration="7448000" />
     </task>
     <task id="LOCAL-00001" summary="literally everything">
       <created>1678299690173</created>
@@ -96,7 +105,28 @@
       <option name="project" value="LOCAL" />
       <updated>1678474011160</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Switched to WinUI (yeay)&#10;Added cat to MainWindow&#10;Numerous bug fixes n shit">
+      <created>1678559941429</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678559941429</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed &quot;database&quot; path">
+      <created>1678560186704</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678560186704</updated>
+    </task>
+    <task id="LOCAL-00006" summary="I should stop making single lined commits">
+      <created>1678560280409</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678560280409</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,7 +148,10 @@
     <MESSAGE value="literally everything" />
     <MESSAGE value="added some filewriter shit" />
     <MESSAGE value="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished the project&#10;TODO: customization - set JTextFields of LoggedInWindow to not editable" />
+    <MESSAGE value="Switched to WinUI (yeay)&#10;Added cat to MainWindow&#10;Numerous bug fixes n shit" />
+    <MESSAGE value="fixed &quot;database&quot; path" />
+    <MESSAGE value="I should stop making single lined commits" />
+    <option name="LAST_COMMIT_MESSAGE" value="I should stop making single lined commits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

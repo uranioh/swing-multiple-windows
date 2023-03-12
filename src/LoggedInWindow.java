@@ -4,23 +4,24 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static javax.swing.SwingConstants.RIGHT;
-
 public class LoggedInWindow extends JFrame {
     String loggedUsername;
 
     JPanel main = new JPanel();
 
-    JLabel label_fName = new JLabel("Nome", RIGHT);
-    JLabel label_lName = new JLabel("Cognome", RIGHT);
-    JLabel label_username = new JLabel("Username", RIGHT);
-    JLabel label_password = new JLabel("Password", RIGHT);
-    JLabel label_gender = new JLabel("Sesso", RIGHT);
-    JLabel label_province = new JLabel("Provincia", RIGHT);
-    JLabel label_city = new JLabel("Città", RIGHT);
-    JLabel label_pin = new JLabel("PIN", RIGHT);
+    //    JLabels
+    JLabel label_fName = new JLabel("Nome");
+    JLabel label_lName = new JLabel("Cognome");
+    JLabel label_username = new JLabel("Username");
+    JLabel label_password = new JLabel("Password");
+    JLabel label_gender = new JLabel("Sesso");
+    JLabel label_province = new JLabel("Provincia");
+    JLabel label_city = new JLabel("Città");
+    JLabel label_pin = new JLabel("PIN");
 
+    JLabel gif = new JLabel(new ImageIcon("src\\images\\dog.gif"));
 
+    //   JTextFields
     JTextField field_fName = new JTextField();
     JTextField field_lName = new JTextField();
     JTextField field_username = new JTextField();
@@ -30,18 +31,22 @@ public class LoggedInWindow extends JFrame {
     JTextField field_city = new JTextField();
     JTextField field_pin = new JTextField();
 
-
+    //    Constructor
     public LoggedInWindow(String loggedUsername) {
-        super("Malvenuto");
+        super("Swing Project - Accesso effettuato come " + loggedUsername);
         this.loggedUsername = loggedUsername;
 
+//        Components declaration and layout
         Container c = this.getContentPane();
-        c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
+        c.setLayout(new GridLayout(1, 2, 10, 10));
 
         setFields();
 
+//        Main panel settings
         main.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        main.setLayout(new GridLayout(8, 2, 10, 10));
 
+//        Disabling the fields
         field_fName.setEditable(false);
         field_lName.setEditable(false);
         field_username.setEditable(false);
@@ -51,7 +56,7 @@ public class LoggedInWindow extends JFrame {
         field_city.setEditable(false);
         field_pin.setEditable(false);
 
-        main.setLayout(new GridLayout(8, 2, 10, 10));
+//        Adding the components to the main panel
         main.add(label_fName);
         main.add(field_fName);
         main.add(label_lName);
@@ -69,15 +74,18 @@ public class LoggedInWindow extends JFrame {
         main.add(label_pin);
         main.add(field_pin);
 
-        c.add(main);
 
+        c.add(main);
+        c.add(gif);
+
+        setResizable(false);
         setLocationRelativeTo(null);
-        setSize(600, 800);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack();
-        this.setVisible(true);
+        setVisible(true);
     }
 
+    //    This method is used to set the fields with the data from the file
     public void setFields() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/users.txt"));

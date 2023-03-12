@@ -4,48 +4,56 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Objects;
-
-import static javax.swing.SwingConstants.RIGHT;
 
 public class SignUpWindow extends JDialog implements ActionListener, WindowListener, KeypadListener {
     String pin;
 
+    //    JPanels declaration
     JPanel JPanel_top = new JPanel();
     JPanel JPanel_bottom = new JPanel();
 
-    JLabel label_fName = new JLabel("Nome", RIGHT);
-    JLabel label_lName = new JLabel("Cognome", RIGHT);
-    JLabel label_username = new JLabel("Username", RIGHT);
-    JLabel label_password = new JLabel("Password", RIGHT);
-    JLabel label_confirm = new JLabel("Conferma Password", RIGHT);
+    //    JLabels declaration
+    JLabel label_fName = new JLabel("Nome");
+    JLabel label_lName = new JLabel("Cognome");
+    JLabel label_username = new JLabel("Username");
+    JLabel label_password = new JLabel("Password");
+    JLabel label_confirm = new JLabel("Conferma password");
+    JLabel label_gender = new JLabel("Sesso");
+    JLabel label_province = new JLabel("Provincia");
+    JLabel label_city = new JLabel("Città");
 
+    //    Input fields declaration
     JTextField field_fName = new JTextField();
     JTextField field_lName = new JTextField();
     JTextField field_username = new JTextField();
     JPasswordField field_password = new JPasswordField();
     JPasswordField field_confirm = new JPasswordField();
-
+    //  Gender radio buttons
     JPanel JPanel_genderGroup = new JPanel();
-    JLabel label_gender = new JLabel("Sesso", RIGHT);
     ButtonGroup buttonGroup_gender = new ButtonGroup();
     JRadioButton radioButton_male = new JRadioButton("Maschio");
     JRadioButton radioButton_female = new JRadioButton("Femmina");
+    //    Province combobox
+    String[] array_province = {"Selargius", "Cagliari", "Villasor", "Domus De Maria", "Napoli"};
+    JComboBox<String> combobox_province = new JComboBox<>(array_province);
+    //    City text field
+    JTextField field_city = new JTextField();
 
+    //    Bottom panel buttons
     JButton button_confirm = new JButton("Invia");
     JButton button_cancel = new JButton("Annulla");
 
-
-    JLabel label_province = new JLabel("Provincia", RIGHT);
-    String[] array_province = {"Selargius", "Cagliari", "Villasor", "Domus de Maria", "Napoli"};
-    JComboBox<String> combobox_province = new JComboBox<>(array_province);
-
-    JLabel label_city = new JLabel("Città", RIGHT);
-    JTextField field_city = new JTextField();
-
+    //    Constructor
     public SignUpWindow(Frame parent) {
+//        JDialog settings
         super(parent, "Registrazione", true);
+
+//        Components declaration and layout
         Container c = this.getContentPane();
         c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
@@ -72,6 +80,9 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
         JPanel_top.add(label_confirm);
         JPanel_top.add(field_confirm);
 
+//        Gender selection properties
+        radioButton_male.setActionCommand("Maschio");
+        radioButton_female.setActionCommand("Femmina");
         buttonGroup_gender.add(radioButton_male);
         buttonGroup_gender.add(radioButton_female);
         JPanel_genderGroup.setLayout(new GridLayout(1, 2, 10, 10));
@@ -103,23 +114,26 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
 //        Window settings
         addWindowListener(this);
 
+        setResizable(false);
         setSize(400, 450);
         setLocationRelativeTo(null);
         setVisible(true);
-        setResizable(false);
     }
 
+    //    writeToFile method - writes the user data to the users.txt file
     public void writeToFile() {
+//        Temporary variables to store the data - they are used to capitalize the first letter of the name, surname and city
         String _fName = field_fName.getText().substring(0, 1).toUpperCase() + field_fName.getText().substring(1).toLowerCase();
         String _lName = field_lName.getText().substring(0, 1).toUpperCase() + field_lName.getText().substring(1).toLowerCase();
         String _username = field_username.getText();
         String _password = new String(field_password.getPassword());
         String _gender = buttonGroup_gender.getSelection().getActionCommand();
         String _province = Objects.requireNonNull(combobox_province.getSelectedItem()).toString();
-        String _city = field_city.getText().substring(0, 1).toUpperCase() + field_city.getText().substring(1).toLowerCase();
+        String _city = field_city.getText().substring(0, 1).toUpperCase() + field_city.getText().substring(1);
 
         try {
             FileWriter fw = new FileWriter("src/users.txt", true);
+//            Writes the data to the file and adds a new line
             fw.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s", _fName, _lName, _username, _password, _gender, _province, _city, pin));
             fw.write(System.lineSeparator());
             fw.close();
@@ -128,13 +142,16 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
         }
     }
 
+    //    Custom interface: KeypadListener - get the pin from the keypad when it gets confirmed
     @Override
     public void onKeypadResult(String result) {
         pin = result;
         writeToFile();
+        JOptionPane.showMessageDialog(this, "Registrazione avvenuta con successo!");
         this.dispose();
     }
 
+    //    Method to check if the username is already taken
     public boolean checkUsername(String username) {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/users.txt"));
@@ -151,17 +168,27 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
         return false;
     }
 
+    //    Action listener
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("confirm")) {
+//            Checks if the fields are empty
             if (field_fName.getText().isEmpty() || field_lName.getText().isEmpty() || field_username.getText().isEmpty() || new String(field_password.getPassword()).isEmpty() || new String(field_confirm.getPassword()).isEmpty() || buttonGroup_gender.getSelection() == null || field_city.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Completa tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
-            } else if (!new String(field_password.getPassword()).equals(new String(field_confirm.getPassword()))) {
+            }
+//            Checks if the password and the confirmation match
+            else if (!new String(field_password.getPassword()).equals(new String(field_confirm.getPassword()))) {
                 JOptionPane.showMessageDialog(this, "Le password non corrispondono", "Errore", JOptionPane.ERROR_MESSAGE);
-            } else if (new String(field_password.getPassword()).length() < 8) {
+            }
+//            Checks if the password is at least 8 characters long
+            else if (new String(field_password.getPassword()).length() < 8) {
                 JOptionPane.showMessageDialog(this, "La password deve contenere almeno 8 caratteri", "Errore", JOptionPane.ERROR_MESSAGE);
-            } else if (checkUsername(field_username.getText())) {
+            }
+//            Checks if the username is already taken
+            else if (checkUsername(field_username.getText())) {
                 JOptionPane.showMessageDialog(this, "Username già esistente", "Errore", JOptionPane.ERROR_MESSAGE);
-            } else {
+            }
+//            Opens the keypad window if all the checks are passed
+            else {
                 new KeypadWindow(this, this, false);
             }
         }
