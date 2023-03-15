@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea2343a5-4325-4843-9428-5ca3ed9d46d2" name="Changes" comment="added some filewriter shit">
+    <list default="true" id="ea2343a5-4325-4843-9428-5ca3ed9d46d2" name="Changes" comment="removed a fucking useless boolean">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KeypadWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeypadWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoggedInWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoggedInWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SignUpWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SignUpWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +69,7 @@
       <workItem from="1678382870733" duration="2718000" />
       <workItem from="1678463596031" duration="10220000" />
       <workItem from="1678699233231" duration="1015000" />
-      <workItem from="1678870217312" duration="351000" />
+      <workItem from="1678870217312" duration="1182000" />
     </task>
     <task id="LOCAL-00001" summary="literally everything">
       <created>1678299690173</created>
@@ -88,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678385983749</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="removed a fucking useless boolean">
+      <created>1678870702445</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678870702445</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,7 +113,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="literally everything" />
     <MESSAGE value="added some filewriter shit" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some filewriter shit" />
+    <MESSAGE value="removed a fucking useless boolean" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed a fucking useless boolean" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

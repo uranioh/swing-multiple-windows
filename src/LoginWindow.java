@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -93,7 +94,11 @@ public class LoginWindow extends JDialog implements ActionListener, WindowListen
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            try {
+                new File("src/users.txt").createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
 
 //        Return true if both the username and password are correct
@@ -116,7 +121,11 @@ public class LoginWindow extends JDialog implements ActionListener, WindowListen
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            try {
+                new File("src/users.txt").createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
 
         return pin;

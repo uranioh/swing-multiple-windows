@@ -4,10 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Objects;
 
 public class SignUpWindow extends JDialog implements ActionListener, WindowListener, KeypadListener {
@@ -138,7 +135,11 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
             fw.write(System.lineSeparator());
             fw.close();
         } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            try {
+                new File("src/users.txt").createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 
