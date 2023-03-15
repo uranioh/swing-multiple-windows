@@ -10,7 +10,6 @@ public class KeypadWindow extends JDialog implements ActionListener, WindowListe
     private final KeypadListener listener;
 
     //    boolean to check if the KeypadWindow is used for login or not
-    boolean isLogin;
 
     //    Components declaration
     JPanel JPanel_top = new JPanel();
@@ -20,13 +19,12 @@ public class KeypadWindow extends JDialog implements ActionListener, WindowListe
     JButton[][] keypad = new JButton[4][3];
 
     //    Constructor
-    public KeypadWindow(Dialog owner, KeypadListener listener, boolean isLogin) {
+    public KeypadWindow(Dialog owner, KeypadListener listener) {
 //        JDialog settings
         super(owner, "PIN", true);
 
 //        Imports the KeypadListener interface and the boolean isLogin
         this.listener = listener;
-        this.isLogin = isLogin;
 
 //        Components declaration and layout
         Container c = this.getContentPane();

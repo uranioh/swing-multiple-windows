@@ -138,7 +138,7 @@ public class LoginWindow extends JDialog implements ActionListener, WindowListen
         if (e.getActionCommand().equals("confirm")) {
 //            Open the keypad window if the credentials are correct, otherwise show an error message
             if (checkCredentials()) {
-                new KeypadWindow(this, this, true);
+                new KeypadWindow(this, this);
             } else {
                 JOptionPane.showMessageDialog(this, "Username o password errati", "Errore", JOptionPane.ERROR_MESSAGE);
             }

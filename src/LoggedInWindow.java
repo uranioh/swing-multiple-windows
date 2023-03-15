@@ -19,7 +19,11 @@ public class LoggedInWindow extends JFrame {
     JLabel label_city = new JLabel("Città");
     JLabel label_pin = new JLabel("PIN");
 
-    JLabel gif = new JLabel(new ImageIcon("src\\images\\dog.gif"));
+    JLabel gif = new JLabel("""
+            <html>
+                <img src="file:src/images/dog.gif" alt="dog">
+            </html>
+            """);
 
     //   JTextFields
     JTextField field_fName = new JTextField();

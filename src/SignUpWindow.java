@@ -189,7 +189,7 @@ public class SignUpWindow extends JDialog implements ActionListener, WindowListe
             }
 //            Opens the keypad window if all the checks are passed
             else {
-                new KeypadWindow(this, this, false);
+                new KeypadWindow(this, this);
             }
         }
 
